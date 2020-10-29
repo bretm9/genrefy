@@ -41,3 +41,13 @@ export const cleanGenreTrackData = (track: AlbumTrack): CleanedAlbumTrack => {
     songUrl: track.url
   }
 }
+
+export const randomizeSongs = (playlist: CleanedAlbumTrack[]) => {
+  const newSongsArray = [];
+  const iteration: number = playlist.length;
+  for (let i = 0; i < iteration; i++) {
+    let getRandomIndex = Math.floor(Math.random() * playlist.length);
+    newSongsArray.push(playlist.splice(getRandomIndex, 1)[0])
+  }
+  return newSongsArray;
+}
