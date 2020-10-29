@@ -3,7 +3,7 @@ import './App.scss';
 import { Link, Route, NavLink} from 'react-router-dom';
 
 import Header from '../Header/Header';
-import Genre from '../Genre/Genre';
+import GenresList from '../GenresList/GenresList';
 import PlaylistContainer from '../PlaylistContainer/PlaylistContainer';
 
 class App extends Component<{}> {
@@ -23,7 +23,7 @@ class App extends Component<{}> {
 				<Route exact path='/' render={() => {
 					return (
 						<section className="testing">
-							<Genre />
+							<GenresList />
 							<PlaylistContainer playlistType={'custom-playlist'} /> {/* Custom Playlist */}
 							<PlaylistContainer playlistType={'generated-playlist'} /> {/* Generated Playlist */}
 						</section>
