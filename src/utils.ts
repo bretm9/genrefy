@@ -28,3 +28,16 @@ export interface CleanedAlbumTrack {
   songName: string,
   songUrl: string,
 }
+
+export const cleanGenreTrackData = (track: AlbumTrack): CleanedAlbumTrack => {
+  return {
+    mbid: track.mbid,
+    artist: {
+      name: track.artist.name,
+      artistUrl: track.artist.url
+    },
+    duration: track.duration,
+    songName: track.name,
+    songUrl: track.url
+  }
+}
