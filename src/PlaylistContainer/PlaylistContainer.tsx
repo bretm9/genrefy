@@ -1,23 +1,31 @@
-import React from 'react'
+import React from 'react';
 
-const displayPlaylist = (playlistType: string) => {
-  if (playlistType === 'saved-playlist') {
-    return <h1>Saved Playlist</h1>
-  }
-  if (playlistType === 'generated-playlist') {
-    return <h1>Generated Playlist</h1>
-  }
-  if (playlistType === 'custom-playlist') {
-    return <h1>Custom Playlist</h1>
-  }
+import GeneratedPlaylist from '../GeneratedPlaylists/GeneratedPlaylist';
+
+enum PlaylistTypes {
+	SavedPlaylist = 'saved-playlist',
+	GeneratedPlaylist = 'generated-playlist',
+	CustomPlaylist = 'custom-playlist',
 }
 
+const displayPlaylist = (playlistType: PlaylistTypes) => {
+	if (playlistType === PlaylistTypes.SavedPlaylist) {
+		return <h1>Saved Playlist</h1>;
+	}
+	if (playlistType === PlaylistTypes.GeneratedPlaylist) {
+		return <GeneratedPlaylist />;
+	}
+	if (playlistType === PlaylistTypes.CustomPlaylist) {
+		return <h1>Custom Playlist</h1>;
+	}
+};
+
 function PlaylistContainer(props: any) {
-  return (
-    <section className='playlist-container'>
-      { displayPlaylist(props.playlistType) }
-    </section>
-  )
+	return (
+		<section className='playlist-container'>
+			{displayPlaylist(props.playlistType)}
+		</section>
+	);
 }
 
 export default PlaylistContainer;
