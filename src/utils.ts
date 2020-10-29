@@ -18,3 +18,13 @@ interface AlbumTrack {
   url: string
 }
 
+export interface CleanedAlbumTrack {
+  mbid: string,
+  artist: {
+    name: string,
+    artistUrl: string
+  },
+  duration: string,
+  songName: string,
+  songUrl: string,
+}
