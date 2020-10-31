@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { getGenres } from '../apiCalls'
 
-interface IProps {}
+// come back and properly type setAppGenre
+interface IProps {setAppGenre: (genre: string) => void}
 interface IState { genres: string[] }
 
 class Genre extends Component<IProps, IState> {  
@@ -21,10 +22,14 @@ class Genre extends Component<IProps, IState> {
     .then(data => this.setState({ genres: data}))
   }
 
+  updateSelectedGenre = (event: React.MouseEvent<HTMLHeadingElement>) => {
+    this.props.setAppGenre(event.currentTarget.innerHTML)
+  }
+
   renderGenres = () => {
     return this.state.genres.map((genre, i) => {
       return (
-          <h3 key={i}>{genre}</h3>
+          <h3 key={i} onClick={this.updateSelectedGenre}>{genre}</h3>
       )
     })
   }
