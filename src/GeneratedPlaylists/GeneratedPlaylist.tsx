@@ -19,18 +19,18 @@ class GeneratedPlaylist extends Component<IProps, IState> {
   //   .then(data => this.setState({ songs: data }));
   // }
 
-  // displaySongs = () => {
-  //   return this.state.songs.reduce((finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
-  //     if (index < 10) {
-  //       const songToDisplay = 
-  //         <section key={index}>
-  //           <h3>{currentSong.songName}</h3>
-  //         </section>;
-  //       finalSongs.push(songToDisplay)
-  //     }
-  //     return finalSongs
-  //   }, [])
-  // }
+  displaySongs = () => {
+    return this.state.songs.reduce((finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
+      if (index < 10) {
+        const songToDisplay = 
+          <section key={index}>
+            <h3>{currentSong.songName}</h3>
+          </section>;
+        finalSongs.push(songToDisplay)
+      }
+      return finalSongs
+    }, [])
+  }
 
   render() {
     const songsToDisplay = this.displaySongs()
