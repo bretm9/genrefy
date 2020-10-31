@@ -23,4 +23,10 @@ describe('Genre', () => {
 		);
 		expect(screen.getByText('kraut mallet')).toBeInTheDocument();
 	});
+
+	test('should update selected genre when clicked', () => {
+		userEvent.click(screen.getByRole('heading', { name: 'jesus funk' }));
+		expect(mockSelectedGenre).toHaveBeenCalledTimes(1);
+		expect(mockSelectedGenre).toHaveBeenCalledWith('jesus funk');
+	});
 });
