@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { getGenres } from '../apiCalls'
 
+import Genre from '../Genre/Genre'
+
 // come back and properly type setAppGenre
 interface IProps {setAppGenre: (genre: string) => void}
 interface IState { genres: string[] }
 
-class Genre extends Component<IProps, IState> {  
+class GenreList extends Component<IProps, IState> {  
   constructor(props: any) {
     super(props)
     this.state = {
@@ -43,4 +45,4 @@ class Genre extends Component<IProps, IState> {
   }
 }
 
-export default Genre;
+export default GenreList;
