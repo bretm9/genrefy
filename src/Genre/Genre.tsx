@@ -10,7 +10,7 @@ function Genre(props: IProps) {
 		<section className='genre'>
 			<h1
 				onClick={event =>
-					props.updateSelectedGenre(event.currentTarget.innerText)
+					props.updateSelectedGenre(event.currentTarget.innerHTML)
 				}>
 				{props.genre}
 			</h1>
