@@ -14,10 +14,10 @@ class GeneratedPlaylist extends Component<IProps, IState> {
     }
   }
 
-  // componentDidMount = () => {
-  //   getPlaylist(this.state.selectedGenre)
-  //   .then(data => this.setState({ songs: data }));
-  // }
+  componentDidMount = () => {
+    getPlaylist(this.state.selectedGenre)
+    .then(data => this.setState({ songs: data }));
+  }
 
   displaySongs = () => {
     return this.state.songs.reduce((finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
