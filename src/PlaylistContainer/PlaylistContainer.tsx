@@ -8,7 +8,7 @@ import { CleanedAlbumTrack } from '../utils';
 interface IProps {
 	playlistType: string,
 	selectedGenre: string,
-	playlists: [CleanedAlbumTrack[]] | []
+	playlists: CleanedAlbumTrack[][] | []
 }
 
 enum PlaylistTypes {
@@ -17,7 +17,7 @@ enum PlaylistTypes {
 	// CustomPlaylist = 'custom-playlist',
 }
 
-const displayPlaylist = (playlistType: string, playlists: [CleanedAlbumTrack[]] | [], selectedGenre: string) => {
+const displayPlaylist = (playlistType: string, playlists: any, selectedGenre: string) => {
 	if (playlistType === PlaylistTypes.SavedPlaylist) {
 		return <SavedPlaylist />;
 	}

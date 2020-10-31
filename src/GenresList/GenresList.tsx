@@ -1,48 +1,27 @@
-import React, { Component } from 'react'
-import { getGenres } from '../apiCalls'
+import React from 'react'
 
 import Genre from '../Genre/Genre'
 
-// come back and properly type setAppGenre
-interface IProps {setAppGenre: (genre: string) => void}
-interface IState { genres: string[] }
+interface IProps {setAppGenre: (genre: string) => void, genres: string[], selectedGenre: string}
 
-class GenreList extends Component<IProps, IState> {  
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      genres: []
-    }
+function GenresList(props: IProps) {  
+  const updateSelectedGenre = (genre: string) => {
+    props.setAppGenre(genre)
   }
-
-  componentDidMount() {
-    this.setGenres()
-  }
-
-  setGenres = () => {
-    getGenres()
-    .then(data => this.setState({ genres: data}))
-  }
-
-  updateSelectedGenre = (genre: string) => {
-    this.props.setAppGenre(genre)
-  }
-
-  renderGenres = () => {
-    return this.state.genres.map((genre, i) => {
+  
+  const renderGenres = () => {
+    return props.genres.map((genre: string, i: number) => {
       return (
-        <Genre key={i} updateSelectedGenre={this.updateSelectedGenre} genre={genre} />
+        <Genre key={i} updateSelectedGenre={updateSelectedGenre} genre={genre} />
       )
     })
   }
 
-  render() {
-    return (
-      <section>
-        {this.renderGenres()}
-      </section>
-    )
-  }
+  return (
+    <section>
+      {renderGenres()}
+    </section>
+  )
 }
 
-export default GenreList;
+export default GenresList;
