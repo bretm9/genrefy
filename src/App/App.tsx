@@ -6,10 +6,14 @@ import Header from '../Header/Header';
 import GenresList from '../GenresList/GenresList';
 import PlaylistContainer from '../PlaylistContainer/PlaylistContainer';
 
+import { getPlaylist } from '../apiCalls';
+
+import { CleanedAlbumTrack } from '../utils';
+
 interface IProps {}
 interface IState {
 	genres: [],
-	playlists: [],
+	playlists: [CleanedAlbumTrack[]] | [],
 	selectedGenre: string
 }
 
@@ -19,8 +23,13 @@ class App extends Component<IProps, IState> {
 		this.state = {
 			genres: [],
 			playlists: [],
-			selectedGenre: ""
+			selectedGenre: "hip hop"
 		}
+	}
+
+	componentDidMount = () => {
+		getPlaylist(this.state.selectedGenre)
+		.then(data => this.setState({ playlists: [[...data]] }));
 	}
 
 	setAppGenre = (genre: string) => {
@@ -35,9 +44,9 @@ class App extends Component<IProps, IState> {
 				<Route exact path='/' render={() => {
 					return (
 						<section className="testing">
-							<GenresList setAppGenre={this.setAppGenre}/>
-							<PlaylistContainer playlistType={'generated-playlist'} selectedGenre={this.state.selectedGenre}/>
-							<PlaylistContainer playlistType={'custom-playlist'} />
+							<GenresList setAppGenre={this.setAppGenre} />
+							<PlaylistContainer playlistType={'generated-playlist'} selectedGenre={this.state.selectedGenre} />
+							{/* <PlaylistContainer playlistType={'custom-playlist'} /> */}
 						</section>
 					)
 				}} />
