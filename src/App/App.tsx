@@ -13,7 +13,7 @@ import { CleanedAlbumTrack } from '../utils';
 interface IProps {}
 interface IState {
 	genres: [],
-	playlists: any,
+	playlists: CleanedAlbumTrack[][] | [],
 	selectedGenre: string
 }
 
