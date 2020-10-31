@@ -17,24 +17,24 @@ enum PlaylistTypes {
 	// CustomPlaylist = 'custom-playlist',
 }
 
-function PlaylistContainer(props: IProps) {
-	const displayPlaylist = (playlistType: string) => {
-		if (playlistType === PlaylistTypes.SavedPlaylist) {
-			return <SavedPlaylist />;
-		}
-		if (playlistType === PlaylistTypes.GeneratedPlaylist && props.playlists.length) {
-			return props.playlists.map((playlist: CleanedAlbumTrack[], index: number) => {
-				return <GeneratedPlaylist key={index} selectedGenre={props.selectedGenre} playlist={playlist} />
-			})
-		}
-		// if (playlistType === PlaylistTypes.CustomPlaylist) {
-		// 	return <CustomPlaylist />;
-		// }
-	};
+const displayPlaylist = (playlistType: string, playlists: [CleanedAlbumTrack[]] | [], selectedGenre: string) => {
+	if (playlistType === PlaylistTypes.SavedPlaylist) {
+		return <SavedPlaylist />;
+	}
+	if (playlistType === PlaylistTypes.GeneratedPlaylist && playlists.length) {
+		return playlists.map((playlist: CleanedAlbumTrack[], index: number) => {
+			return <GeneratedPlaylist key={index} selectedGenre={selectedGenre} playlist={playlist} />
+		})
+	}
+	// if (playlistType === PlaylistTypes.CustomPlaylist) {
+	// 	return <CustomPlaylist />;
+	// }
+};
 
+function PlaylistContainer(props: IProps) {
 	return (
 		<section className='playlist-container'>
-			{displayPlaylist(props.playlistType)}
+			{displayPlaylist(props.playlistType, props.playlists, props.selectedGenre)}
 		</section>
 	);
 }
