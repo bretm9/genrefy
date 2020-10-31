@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { getGenres } from '../apiCalls'
 
+import Genre from '../Genre/Genre'
+
 // come back and properly type setAppGenre
 interface IProps {setAppGenre: (genre: string) => void}
 interface IState { genres: string[] }
 
-class Genre extends Component<IProps, IState> {  
+class GenreList extends Component<IProps, IState> {  
   constructor(props: any) {
     super(props)
     this.state = {
@@ -22,14 +24,14 @@ class Genre extends Component<IProps, IState> {
     .then(data => this.setState({ genres: data}))
   }
 
-  updateSelectedGenre = (event: React.MouseEvent<HTMLHeadingElement>) => {
-    this.props.setAppGenre(event.currentTarget.innerHTML)
+  updateSelectedGenre = (genre: string) => {
+    this.props.setAppGenre(genre)
   }
 
   renderGenres = () => {
     return this.state.genres.map((genre, i) => {
       return (
-          <h3 key={i} onClick={this.updateSelectedGenre}>{genre}</h3>
+        <Genre key={i} updateSelectedGenre={this.updateSelectedGenre} genre={genre} />
       )
     })
   }
@@ -43,4 +45,4 @@ class Genre extends Component<IProps, IState> {
   }
 }
 
-export default Genre;
+export default GenreList;
