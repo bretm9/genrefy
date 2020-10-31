@@ -6,16 +6,28 @@ import Header from '../Header/Header';
 import GenresList from '../GenresList/GenresList';
 import PlaylistContainer from '../PlaylistContainer/PlaylistContainer';
 
-class App extends Component<{}> {
+interface IProps {}
+interface IState {
+	genres: [],
+	playlists: [],
+	selectedGenre: string
+}
+
+class App extends Component<IProps, IState> {
 	constructor(props: any) {
 		super(props)
 		this.state = {
 			genres: [],
-			playlists: []
+			playlists: [],
+			selectedGenre: ""
 		}
 	}
+
+	setAppGenre = (genre: string) => {
+		this.setState({ selectedGenre: genre })
+	}
 	
-	render () {
+	render() {
 		return (
 			<div className='App'>
 				<h1>Genrefy</h1>
@@ -23,9 +35,9 @@ class App extends Component<{}> {
 				<Route exact path='/' render={() => {
 					return (
 						<section className="testing">
-							<GenresList />
+							<GenresList setAppGenre={this.setAppGenre}/>
+							<PlaylistContainer playlistType={'generated-playlist'} selectedGenre={this.state.selectedGenre}/>
 							<PlaylistContainer playlistType={'custom-playlist'} />
-							<PlaylistContainer playlistType={'generated-playlist'} />
 						</section>
 					)
 				}} />
