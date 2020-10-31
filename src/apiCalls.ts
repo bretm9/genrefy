@@ -15,7 +15,8 @@ export const getPlaylist = (genre: string) => {
         const CleanedGenreTrackData: CleanedAlbumTrack[] = data.tracks.track.map((song: AlbumTrack)  => {
           return cleanGenreTrackData(song)
         })
-        return randomizeSongs(CleanedGenreTrackData)
+        const randomPlaylist = randomizeSongs(CleanedGenreTrackData);
+        return randomPlaylist.filter((_playlist, index) => index < 10);
       })
   )
 }

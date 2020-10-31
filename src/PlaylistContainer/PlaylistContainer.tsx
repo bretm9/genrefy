@@ -1,30 +1,40 @@
 import React from 'react';
 import SavedPlaylist from '../SavedPlaylists/SavedPlaylist';
 import GeneratedPlaylist from '../GeneratedPlaylists/GeneratedPlaylist';
-import CustomPlaylist from '../CustomPlaylists/CustomPlaylist';
+// import CustomPlaylist from '../CustomPlaylists/CustomPlaylist';
+
+import { CleanedAlbumTrack } from '../utils';
+
+interface IProps {
+	playlistType: string,
+	selectedGenre: string,
+	playlists: [CleanedAlbumTrack[]] | []
+}
 
 enum PlaylistTypes {
 	SavedPlaylist = 'saved-playlist',
 	GeneratedPlaylist = 'generated-playlist',
-	CustomPlaylist = 'custom-playlist',
+	// CustomPlaylist = 'custom-playlist',
 }
 
-const displayPlaylist = (playlistType: PlaylistTypes) => {
+const displayPlaylist = (playlistType: string, playlists: [CleanedAlbumTrack[]] | [], selectedGenre: string) => {
 	if (playlistType === PlaylistTypes.SavedPlaylist) {
 		return <SavedPlaylist />;
 	}
-	if (playlistType === PlaylistTypes.GeneratedPlaylist) {
-		return <GeneratedPlaylist />;
+	if (playlistType === PlaylistTypes.GeneratedPlaylist && playlists.length) {
+		return playlists.map((playlist: CleanedAlbumTrack[], index: number) => {
+			return <GeneratedPlaylist key={index} selectedGenre={selectedGenre} playlist={playlist} />
+		})
 	}
-	if (playlistType === PlaylistTypes.CustomPlaylist) {
-		return <CustomPlaylist />;
-	}
+	// if (playlistType === PlaylistTypes.CustomPlaylist) {
+	// 	return <CustomPlaylist />;
+	// }
 };
 
-function PlaylistContainer(props: any) {
+function PlaylistContainer(props: IProps) {
 	return (
 		<section className='playlist-container'>
-			{displayPlaylist(props.playlistType)}
+			{displayPlaylist(props.playlistType, props.playlists, props.selectedGenre)}
 		</section>
 	);
 }
