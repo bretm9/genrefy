@@ -1,6 +1,7 @@
 import React from 'react';
-
+import SavedPlaylist from '../SavedPlaylists/SavedPlaylist';
 import GeneratedPlaylist from '../GeneratedPlaylists/GeneratedPlaylist';
+import CustomPlaylist from '../CustomPlaylists/CustomPlaylist';
 
 enum PlaylistTypes {
 	SavedPlaylist = 'saved-playlist',
@@ -10,13 +11,13 @@ enum PlaylistTypes {
 
 const displayPlaylist = (playlistType: PlaylistTypes) => {
 	if (playlistType === PlaylistTypes.SavedPlaylist) {
-		return <h1>Saved Playlist</h1>;
+		return <SavedPlaylist />;
 	}
 	if (playlistType === PlaylistTypes.GeneratedPlaylist) {
 		return <GeneratedPlaylist />;
 	}
 	if (playlistType === PlaylistTypes.CustomPlaylist) {
-		return <h1>Custom Playlist</h1>;
+		return <CustomPlaylist />;
 	}
 };
 

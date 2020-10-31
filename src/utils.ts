@@ -1,4 +1,4 @@
-interface AlbumTrack {
+export interface AlbumTrack {
   "@attr": {
     rank: string
   },
