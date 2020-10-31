@@ -3,19 +3,29 @@ import SavedPlaylist from '../SavedPlaylists/SavedPlaylist';
 import GeneratedPlaylist from '../GeneratedPlaylists/GeneratedPlaylist';
 // import CustomPlaylist from '../CustomPlaylists/CustomPlaylist';
 
+import { CleanedAlbumTrack } from '../utils';
+
+interface IProps {
+	playlistType: string,
+	selectedGenre: string,
+	playlists: [CleanedAlbumTrack[]] | []
+}
+
 enum PlaylistTypes {
 	SavedPlaylist = 'saved-playlist',
 	GeneratedPlaylist = 'generated-playlist',
 	// CustomPlaylist = 'custom-playlist',
 }
 
-function PlaylistContainer(props: any) {
-	const displayPlaylist = (playlistType: PlaylistTypes) => {
+function PlaylistContainer(props: IProps) {
+	const displayPlaylist = (playlistType: string) => {
 		if (playlistType === PlaylistTypes.SavedPlaylist) {
 			return <SavedPlaylist />;
 		}
-		if (playlistType === PlaylistTypes.GeneratedPlaylist) {
-			return <GeneratedPlaylist selectedGenre={props.selectedGenre}/>;
+		if (playlistType === PlaylistTypes.GeneratedPlaylist && props.playlists.length) {
+			return props.playlists.map((playlist: CleanedAlbumTrack[], index: number) => {
+				return <GeneratedPlaylist key={index} selectedGenre={props.selectedGenre} playlist={playlist} />
+			})
 		}
 		// if (playlistType === PlaylistTypes.CustomPlaylist) {
 		// 	return <CustomPlaylist />;
