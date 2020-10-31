@@ -1,9 +1,15 @@
 import React from 'react'
 
-function Genre() {
+interface IProps {
+  updateSelectedGenre: (genre: string) => void;
+  genre: string;
+}
+
+function Genre(props: IProps) {
+  console.log(props);
   return (
     <section className='genre'>
-      <h1>Genre</h1>
+      <h1>{props.genre}</h1>
     </section>
   )
 }
