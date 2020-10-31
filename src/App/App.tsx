@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
-import { Link, Route, NavLink} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import GenresList from '../GenresList/GenresList';
@@ -24,8 +24,8 @@ class App extends Component<{}> {
 					return (
 						<section className="testing">
 							<GenresList />
-							<PlaylistContainer playlistType={'custom-playlist'} /> {/* Custom Playlist */}
-							<PlaylistContainer playlistType={'generated-playlist'} /> {/* Generated Playlist */}
+							<PlaylistContainer playlistType={'custom-playlist'} />
+							<PlaylistContainer playlistType={'generated-playlist'} />
 						</section>
 					)
 				}} />
