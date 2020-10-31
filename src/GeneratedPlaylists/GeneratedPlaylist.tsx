@@ -2,20 +2,19 @@ import React, { Component } from 'react'
 import { CleanedAlbumTrack } from '../utils'
 import { getPlaylist } from '../apiCalls'
 
-interface IProps {}
-interface IState { songs: CleanedAlbumTrack[],  selectedGenre: string }
+interface IProps { selectedGenre: string }
+interface IState { songs: CleanedAlbumTrack[] }
 
 class GeneratedPlaylist extends Component<IProps, IState> {
-  constructor(props: any) {
+  constructor(props: IProps) {
     super(props)
     this.state = {
       songs: [],
-      selectedGenre: ""
     }
   }
 
   componentDidMount = () => {
-    getPlaylist(this.state.selectedGenre)
+    getPlaylist(this.props.selectedGenre)
     .then(data => this.setState({ songs: data }));
   }
 
