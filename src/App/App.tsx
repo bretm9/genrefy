@@ -45,12 +45,12 @@ class App extends Component<IProps, IState> {
 					return (
 						<section className="testing">
 							<GenresList setAppGenre={this.setAppGenre} />
-							<PlaylistContainer playlistType={'generated-playlist'} selectedGenre={this.state.selectedGenre} />
+							<PlaylistContainer playlistType={'generated-playlist'} selectedGenre={this.state.selectedGenre} playlists={this.state.playlists} />
 							{/* <PlaylistContainer playlistType={'custom-playlist'} /> */}
 						</section>
 					)
 				}} />
-				<Route path='/saved-playlist' render={() => <PlaylistContainer playlistType={'saved-playlist'} />} />
+				<Route path='/saved-playlist' render={() => <PlaylistContainer playlistType={'saved-playlist'} selectedGenre={this.state.selectedGenre} playlists={this.state.playlists} />} />
 			</div>
 		)
 	}
