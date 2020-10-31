@@ -1,44 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { CleanedAlbumTrack } from '../utils'
-import { getPlaylist } from '../apiCalls'
 
-interface IProps { selectedGenre: string }
-interface IState { songs: CleanedAlbumTrack[] }
+interface IProps { selectedGenre: string, playlist: CleanedAlbumTrack[] }
 
-class GeneratedPlaylist extends Component<IProps, IState> {
-  constructor(props: IProps) {
-    super(props)
-    this.state = {
-      songs: [],
-    }
-  }
+const displaySongs = (playlist: CleanedAlbumTrack[]) => {
+  return playlist.reduce((finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
+      const songToDisplay = 
+        <section key={index}>
+          <h3>{currentSong.songName}</h3>
+        </section>;
+      finalSongs.push(songToDisplay)
+    return finalSongs
+  }, [])
+}
 
-  componentDidMount = () => {
-    getPlaylist(this.props.selectedGenre)
-    .then(data => this.setState({ songs: data }));
-  }
-
-  displaySongs = () => {
-    return this.state.songs.reduce((finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
-      if (index < 10) {
-        const songToDisplay = 
-          <section key={index}>
-            <h3>{currentSong.songName}</h3>
-          </section>;
-        finalSongs.push(songToDisplay)
-      }
-      return finalSongs
-    }, [])
-  }
-
-  render() {
-    const songsToDisplay = this.displaySongs()
-    return (
-      <section className='generated-playlist'>
-        {songsToDisplay}
-      </section>
-    )
-  }
+const GeneratedPlaylist = (props: IProps) => {
+  return (
+    <section className="generated-playlist">
+      {displaySongs(props.playlist)}
+    </section>
+  )
 }
 
 export default GeneratedPlaylist;
