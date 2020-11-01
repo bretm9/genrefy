@@ -1,5 +1,7 @@
 import { cleanGenreTrackData, CleanedAlbumTrack, AlbumTrack, randomizeSongs } from './utils'
 
+const apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=`;
+
 export const getGenres = () => {
   return (
     fetch('https://binaryjazz.us/wp-json/genrenator/v1/genre/25')
@@ -7,16 +9,22 @@ export const getGenres = () => {
   )
 }
 
-export const getPlaylist = (genre: string) => {
+export const getPlaylist = (genreArray: string[]) => {
   return (
-    fetch(`http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${genre}&api_key=${process.env.REACT_APP_LASTFM_APIKEY}&limit=300&format=json`)
-      .then(response => response.json())
-      .then(data => {
-        const CleanedGenreTrackData: CleanedAlbumTrack[] = data.tracks.track.map((song: AlbumTrack)  => {
-          return cleanGenreTrackData(song)
-        })
-        const randomPlaylist = randomizeSongs(CleanedGenreTrackData);
-        return randomPlaylist.filter((_playlist, index) => index < 10);
+    Promise.all(
+      genreArray.map(genre => {
+        return fetch(`${apiUrl}${genre}&api_key=${process.env.REACT_APP_LASTFM_APIKEY}&limit=100&format=json`)
+          .then(response => response.json())
       })
+    )
+    .then(data => {
+      const combinedPlaylist: CleanedAlbumTrack[] = data.flatMap(playlist => {
+        return playlist.tracks.track.map((song: AlbumTrack) => {
+          return cleanGenreTrackData(song);
+        });
+      });
+      const randomPlaylist = randomizeSongs(combinedPlaylist);
+      return randomPlaylist.filter((_playlist, index) => index < 15);
+    })
   )
 }
