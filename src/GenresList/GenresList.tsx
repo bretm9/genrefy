@@ -2,7 +2,7 @@ import React from 'react'
 
 import Genre from '../Genre/Genre'
 
-interface IProps {setAppGenre: (genre: string) => void, genres: string[], selectedGenre: string}
+interface IProps {setAppGenre: (genre: string) => void, genres: string[]}
 
 function GenresList(props: IProps) {  
   const updateSelectedGenre = (genre: string) => {
