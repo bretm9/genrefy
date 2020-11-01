@@ -4,8 +4,6 @@ import '@testing-library/jest-dom';
 
 import PlaylistContainer from './PlaylistContainer';
 
-const mockSetAppGenre = jest.fn();
-
 describe('PlaylistContainer', () => {
   const playlistType = 'generated-playlist'
   const selectedGenre = 'military western ska'
