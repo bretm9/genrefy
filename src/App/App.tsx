@@ -33,9 +33,24 @@ class App extends Component<IProps, IState> {
 	}
 
 	setAppGenre = (genre: string) => {
-		this.setState({ selectedGenre: genre })
-		getPlaylist(this.state.selectedGenre)
+		this.setState({ selectedGenre: genre });
+		getPlaylist(genre)
 		.then(data => this.setState({ playlists: [...this.state.playlists, [...data]] }));
+	}
+
+	parseGenreForFetch = (genre: string) => {
+		const fillerWordsToRemove = /(the |and |of |\/| |ism)+/;
+		const parseGenreArray = genre.split(fillerWordsToRemove);
+		if (parseGenreArray.includes('')) {
+			const index = parseGenreArray.indexOf('');
+			parseGenreArray.splice(index, 1);
+		}
+		parseGenreArray.forEach((genre, index) => {
+			if (genre.match(fillerWordsToRemove) || genre === '') {
+				parseGenreArray.splice(index, 1);
+			}
+		});
+		return parseGenreArray;
 	}
 	
 	render() {
