@@ -14,12 +14,6 @@ function Genre(props: IProps) {
 				}>
 				{props.genre}
 			</h1>
-			<h6
-				onClick={event =>
-					props.updateSelectedGenre(event.currentTarget.innerHTML)
-				}>
-				Rock
-			</h6>
 		</section>
 	);
 }
