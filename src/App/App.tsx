@@ -34,7 +34,8 @@ class App extends Component<IProps, IState> {
 
 	setAppGenre = (genre: string) => {
 		this.setState({ selectedGenre: genre });
-		getPlaylist(genre)
+		const splitGenreArray = this.parseGenreForFetch(genre);
+		getPlaylist(splitGenreArray)
 		.then(data => this.setState({ playlists: [...this.state.playlists, [...data]] }));
 	}
 
