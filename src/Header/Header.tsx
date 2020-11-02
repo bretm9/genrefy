@@ -1,13 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import './Header.scss'
 
 function Header() {
   return (
     <section className='header'>
-      {/* <img src="../images/genrefy-logo.png" alt="Genrefy"/> */}
-      <article className="logo"></article>
-      <h1>Header</h1>
+      <Link to='/'><article className="logo"></article></Link>
+      <Link to='/saved-playlists'><h1>Saved Playlist</h1></Link>
     </section>
   )
 }
