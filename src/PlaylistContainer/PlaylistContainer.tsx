@@ -3,12 +3,12 @@ import SavedPlaylist from '../SavedPlaylists/SavedPlaylist';
 import GeneratedPlaylist from '../GeneratedPlaylists/GeneratedPlaylist';
 // import CustomPlaylist from '../CustomPlaylists/CustomPlaylist';
 
-import { CleanedAlbumTrack } from '../utils';
+import { CleanedAlbumTrack, Playlist } from '../utils';
 
 interface IProps {
 	playlistType: string,
 	selectedGenre: string,
-	playlists: CleanedAlbumTrack[][] | []
+	playlists: Playlist[] | []
 }
 
 enum PlaylistTypes {
@@ -22,7 +22,7 @@ const displayPlaylist = (playlistType: string, playlists: any, selectedGenre: st
 		return <SavedPlaylist />;
 	}
 	if (playlistType === PlaylistTypes.GeneratedPlaylist && playlists.length) {
-		return playlists.map((playlist: CleanedAlbumTrack[], index: number) => {
+		return playlists.map((playlist: Playlist, index: number) => {
 			return <GeneratedPlaylist key={index} selectedGenre={selectedGenre} playlist={playlist} />
 		})
 	}

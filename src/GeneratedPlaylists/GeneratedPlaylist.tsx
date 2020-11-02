@@ -1,10 +1,10 @@
 import React from 'react'
-import { CleanedAlbumTrack } from '../utils'
+import { Playlist } from '../utils'
 
-interface IProps { selectedGenre: string, playlist: CleanedAlbumTrack[] }
+interface IProps { selectedGenre: string, playlist: Playlist }
 
-const displaySongs = (playlist: CleanedAlbumTrack[]) => {
-  return playlist.reduce((finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
+const displaySongs = (playlist: Playlist) => {
+  return playlist.tracks.reduce((finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
       const songToDisplay = 
         <section key={index}>
           <h3>{currentSong.songName}</h3>
@@ -17,6 +17,7 @@ const displaySongs = (playlist: CleanedAlbumTrack[]) => {
 const GeneratedPlaylist = (props: IProps) => {
   return (
     <section className="generated-playlist">
+      <h1>{props.playlist.name}</h1>
       {displaySongs(props.playlist)}
     </section>
   )

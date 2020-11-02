@@ -1,4 +1,4 @@
-import { cleanGenreTrackData, CleanedAlbumTrack, AlbumTrack, randomizeSongs } from './utils'
+import { cleanGenreTrackData, Playlist, AlbumTrack, randomizeSongs } from './utils'
 
 const apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=`;
 
@@ -18,13 +18,20 @@ export const getPlaylist = (genreArray: string[]) => {
       })
     )
     .then(data => {
-      const combinedPlaylist: CleanedAlbumTrack[] = data.flatMap(playlist => {
-        return playlist.tracks.track.map((song: AlbumTrack) => {
-          return cleanGenreTrackData(song);
-        });
-      });
+      const combinedPlaylist: Playlist = {
+        id: Date.now(),
+        name: genreArray.join(" "),
+        isSaved: false,
+        tracks: data.flatMap(playlist => {
+          return playlist.tracks.track.map((song: AlbumTrack) => {
+            return cleanGenreTrackData(song);
+          });
+        })
+      }
       const randomPlaylist = randomizeSongs(combinedPlaylist);
-      return randomPlaylist.filter((_playlist, index) => index < 15);
+      combinedPlaylist.tracks = randomPlaylist.filter((_playlist, index) => index < 15);
+      console.log(combinedPlaylist);
+      return combinedPlaylist;
     })
   )
 }
