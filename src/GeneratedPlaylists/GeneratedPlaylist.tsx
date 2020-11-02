@@ -1,5 +1,6 @@
-import React from 'react'
-import { Playlist } from '../utils'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Playlist } from '../utils';
 
 interface IProps { selectedGenre: string, playlist: Playlist }
 
@@ -17,7 +18,7 @@ const displaySongs = (playlist: Playlist) => {
 const GeneratedPlaylist = (props: IProps) => {
   return (
     <section className="generated-playlist">
-      <h1>{props.playlist.name}</h1>
+      <Link to={`/playlist/${props.playlist.id}`}>{props.playlist.name}</Link>
       {displaySongs(props.playlist)}
     </section>
   )
