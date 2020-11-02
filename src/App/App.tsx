@@ -57,7 +57,6 @@ class App extends Component<IProps, IState> {
 	render() {
 		return (
 			<div className='App'>
-				<h1>Genrefy</h1>
 				<Header />
 				<Route exact path='/' render={() => {
 					return (
