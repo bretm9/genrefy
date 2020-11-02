@@ -82,10 +82,8 @@ class App extends Component<IProps, IState> {
 					render={({ match }) => {
 						const playlistId = +match.params.id;
 						const foundPlaylist = this.state.playlists.find(playlist => {
-							console.log(playlist)
 							return playlist.id === playlistId
 						});
-						// console.log('playlistID', playlistId, 'foundPlaylist', foundPlaylist)
 						return (
 							<PlaylistDetails
 								playlist={foundPlaylist} 

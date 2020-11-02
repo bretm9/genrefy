@@ -30,7 +30,6 @@ export const getPlaylist = (genreArray: string[]) => {
       }
       const randomPlaylist = randomizeSongs(combinedPlaylist);
       combinedPlaylist.tracks = randomPlaylist.filter((_playlist, index) => index < 15);
-      console.log(combinedPlaylist);
       return combinedPlaylist;
     })
   )

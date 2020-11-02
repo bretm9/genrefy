@@ -18,7 +18,6 @@ const displaySongs = (playlist: Playlist) => {
 }
 
 const PlaylistDetails = (props: IProps) => {
-  console.log(props);
   return (
     <section className="generated-playlist">
       <h1>{props.playlist.name}</h1>
