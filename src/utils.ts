@@ -29,12 +29,12 @@ export interface CleanedAlbumTrack {
   songUrl: string,
 }
 
-// export interface Playlist {
-//   id: number,
-//   name: string,
-//   isSaved: boolean,
-//   tracks: CleanedAlbumTrack[]
-// }
+export interface Playlist {
+  id: number,
+  name: string,
+  isSaved: boolean,
+  tracks: CleanedAlbumTrack[]
+}
 
 export const cleanGenreTrackData = (track: AlbumTrack): CleanedAlbumTrack => {
   return {
