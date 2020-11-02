@@ -5,12 +5,13 @@ import { Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import GenresList from '../GenresList/GenresList';
 import PlaylistContainer from '../PlaylistContainer/PlaylistContainer';
+import PlaylistDetails from '../PlaylistDetails/PlaylistDetails'
 
 import { getPlaylist, getGenres } from '../apiCalls';
 
 import { Playlist } from '../utils';
 
-interface IProps {}
+interface IProps { }
 interface IState {
 	genres: [],
 	playlists: Playlist[] | [],
@@ -29,14 +30,14 @@ class App extends Component<IProps, IState> {
 
 	componentDidMount = () => {
 		getGenres()
-    .then(data => this.setState({ genres: data}))
+			.then(data => this.setState({ genres: data }))
 	}
 
 	setAppGenre = (genre: string) => {
 		this.setState({ selectedGenre: genre });
 		const splitGenreArray = this.parseGenreForFetch(genre);
 		getPlaylist(splitGenreArray)
-		.then(data => this.setState({ playlists: [...this.state.playlists, data] }));
+			.then(data => this.setState({ playlists: [...this.state.playlists, data] }));
 	}
 
 	parseGenreForFetch = (genre: string) => {
@@ -53,7 +54,7 @@ class App extends Component<IProps, IState> {
 		});
 		return parseGenreArray;
 	}
-	
+
 	render() {
 		return (
 			<div className='App'>
@@ -68,7 +69,30 @@ class App extends Component<IProps, IState> {
 						</section>
 					)
 				}} />
-				<Route path='/saved-playlist' render={() => <PlaylistContainer playlistType={'saved-playlist'} selectedGenre={this.state.selectedGenre} playlists={this.state.playlists} />} />
+				<Route 
+					path='/saved-playlist'
+					render={() => <PlaylistContainer
+						playlistType={'saved-playlist'}
+						selectedGenre={this.state.selectedGenre}
+						playlists={this.state.playlists} 
+					/>} 
+				/>
+				<Route 
+					path='/playlist/:id' 
+					render={({ match }) => {
+						const playlistId = +match.params.id;
+						const foundPlaylist = this.state.playlists.find(playlist => {
+							console.log(playlist)
+							return playlist.id === playlistId
+						});
+						// console.log('playlistID', playlistId, 'foundPlaylist', foundPlaylist)
+						return (
+							<PlaylistDetails
+								playlist={foundPlaylist} 
+							/>
+						);
+					}}
+				/>
 			</div>
 		)
 	}
