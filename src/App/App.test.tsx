@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 
-import { CleanedAlbumTrack } from '../utils'
+import { Playlist } from '../utils'
 import { getGenres, getPlaylist } from '../apiCalls'
 import App from './App';
 
@@ -17,28 +17,33 @@ const mockGenres: string[] = [
   'military western ska'
 ]
 
-const mockPlaylist: CleanedAlbumTrack[] = [
-  {
-    "mbid": "e2bad905-75a4-499d-bdea-2e916d73ad76",
-    "artist": {
-      "name": "Sublime",
-      "artistUrl": "https://www.last.fm/music/Sublime"
+const mockPlaylist: Playlist = {
+  id: 1,
+  name: 'military western ska',
+  isSaved: false,
+  tracks: [
+    {
+      "mbid": "e2bad905-75a4-499d-bdea-2e916d73ad76",
+      "artist": {
+        "name": "Sublime",
+        "artistUrl": "https://www.last.fm/music/Sublime"
+      },
+      "duration": "208",
+      "songName": "Smoke Two",
+      "songUrl": "https://www.last.fm/music/Sublime/_/Smoke+Two+Joints"
     },
-    "duration": "208",
-    "songName": "Smoke Two",
-    "songUrl": "https://www.last.fm/music/Sublime/_/Smoke+Two+Joints"
-  },
-  {
-    "mbid": "86906b91-fdbd-4407-bcf1-6105f42525e5",
-    "artist": {
-      "name": "Pat Metheny Group",
-      "artistUrl": "https://www.last.fm/music/Pat+Metheny+Group"
-    },
-    "duration": "167",
-    "songName": "Forward March",
-    "songUrl": "https://www.last.fm/music/Pat+Metheny+Group/_/Forward+March"
-  }
-]
+    {
+      "mbid": "86906b91-fdbd-4407-bcf1-6105f42525e5",
+      "artist": {
+        "name": "Pat Metheny Group",
+        "artistUrl": "https://www.last.fm/music/Pat+Metheny+Group"
+      },
+      "duration": "167",
+      "songName": "Forward March",
+      "songUrl": "https://www.last.fm/music/Pat+Metheny+Group/_/Forward+March"
+    }
+  ]
+}
 
 describe('App', () => {
   test('should render Header to the page', () => {
@@ -65,7 +70,7 @@ describe('App', () => {
     expect(screen.getByText('kindermotown')).toBeInTheDocument();
   });
 
-  test('should render genres to the page', async () => {
+  test('should render generated playlist to the page', async () => {
     (getGenres as jest.Mock).mockResolvedValue(mockGenres);
     (getPlaylist as jest.Mock).mockResolvedValue(mockPlaylist);
     render(

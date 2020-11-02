@@ -29,6 +29,13 @@ export interface CleanedAlbumTrack {
   songUrl: string,
 }
 
+export interface Playlist {
+  id: number,
+  name: string,
+  isSaved: boolean,
+  tracks: CleanedAlbumTrack[]
+}
+
 export const cleanGenreTrackData = (track: AlbumTrack): CleanedAlbumTrack => {
   return {
     mbid: track.mbid,
@@ -42,12 +49,12 @@ export const cleanGenreTrackData = (track: AlbumTrack): CleanedAlbumTrack => {
   }
 }
 
-export const randomizeSongs = (playlist: CleanedAlbumTrack[]) => {
+export const randomizeSongs = (playlist: Playlist) => {
   const newSongsArray = [];
-  const iteration: number = playlist.length;
+  const iteration: number = playlist.tracks.length;
   for (let i = 0; i < iteration; i++) {
-    let getRandomIndex = Math.floor(Math.random() * playlist.length);
-    newSongsArray.push(playlist.splice(getRandomIndex, 1)[0])
+    let getRandomIndex = Math.floor(Math.random() * playlist.tracks.length);
+    newSongsArray.push(playlist.tracks.splice(getRandomIndex, 1)[0])
   }
   return newSongsArray;
 }

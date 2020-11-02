@@ -8,12 +8,12 @@ import PlaylistContainer from '../PlaylistContainer/PlaylistContainer';
 
 import { getPlaylist, getGenres } from '../apiCalls';
 
-import { CleanedAlbumTrack } from '../utils';
+import { Playlist } from '../utils';
 
 interface IProps {}
 interface IState {
 	genres: [],
-	playlists: CleanedAlbumTrack[][] | [],
+	playlists: Playlist[] | [],
 	selectedGenre: string
 }
 
@@ -36,7 +36,7 @@ class App extends Component<IProps, IState> {
 		this.setState({ selectedGenre: genre });
 		const splitGenreArray = this.parseGenreForFetch(genre);
 		getPlaylist(splitGenreArray)
-		.then(data => this.setState({ playlists: [...this.state.playlists, [...data]] }));
+		.then(data => this.setState({ playlists: [...this.state.playlists, data] }));
 	}
 
 	parseGenreForFetch = (genre: string) => {
