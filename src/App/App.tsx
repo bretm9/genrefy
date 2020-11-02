@@ -80,8 +80,8 @@ class App extends Component<IProps, IState> {
 				<Route 
 					path='/playlist/:id' 
 					render={({ match }) => {
-						const playlistId = +match.params.id;
-						const foundPlaylist = this.state.playlists.find(playlist => {
+						const playlistId: number = +match.params.id;
+						const foundPlaylist: Playlist | undefined = this.state.playlists.find(playlist => {
 							return playlist.id === playlistId
 						});
 						return (
