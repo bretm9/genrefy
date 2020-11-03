@@ -69,12 +69,17 @@ class App extends Component<IProps, IState> {
 					)
 				}} />
 				<Route 
-					path='/saved-playlist'
-					render={() => <PlaylistContainer
-						playlistType={'saved-playlist'}
-						selectedGenre={this.state.selectedGenre}
-						playlists={this.state.playlists} 
-					/>} 
+					path='/saved'
+					render={() => {
+						const savedPlaylists: Playlist[] | [] = this.state.playlists.filter(playlist => playlist.isSaved)
+						return (
+							<PlaylistContainer
+								playlistType={'generated-playlist'}
+								selectedGenre={this.state.selectedGenre}
+								playlists={savedPlaylists} 
+							/>
+						)
+					}}
 				/>
 				<Route 
 					path='/playlist/:id' 
