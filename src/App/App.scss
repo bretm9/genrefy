@@ -6,3 +6,10 @@
   background: url(../images/main-background.jpg) no-repeat center;
   background-size: cover;
 }
+
+.app-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw;
+}
