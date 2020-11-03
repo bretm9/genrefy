@@ -71,7 +71,6 @@ describe('GeneratedPlaylist', () => {
   test('should allow a user to save playlist', () => {
     userEvent.click(screen.getByAltText('Save playlist'))
     expect(mockToggleSaved).toHaveBeenCalledWith(playlist1)
-    screen.debug()
   })
   test('should have saved icon with a saved playlist', () => {
     render(
