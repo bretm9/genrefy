@@ -4,8 +4,11 @@
   justify-content: center;
   align-items: center;
   border: .1rem solid white;
-  border-radius: .5rem;
   padding: 1rem;
+  width: 20rem;
+  overflow: hidden;
+  margin: 0 1rem 1rem 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
 
   .generated-playlist-head {
     display: flex;
@@ -13,7 +16,7 @@
     align-items: center;
     width: 100%;
     border-bottom: .1rem solid white;
-    width: 100%;
+    padding: 1rem;
 
     a {
       font-size: 1.5rem;
