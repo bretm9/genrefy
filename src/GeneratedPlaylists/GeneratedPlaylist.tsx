@@ -20,7 +20,7 @@ const displaySongs = (playlist: Playlist) => {
 	return playlist.tracks.reduce(
 		(finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
 			const songToDisplay = (
-				<section key={index}>
+				<section key={index} className='playlist-body'>
 					<h3>{currentSong.songName}</h3>
 				</section>
 			);
