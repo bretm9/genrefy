@@ -55,6 +55,11 @@ class App extends Component<IProps, IState> {
 		return parseGenreArray;
 	};
 
+	toggleSavedPlaylist = (playlist: Playlist) => {
+		playlist.isSaved = !playlist.isSaved;
+		this.setState({ playlists: [...this.state.playlists] });
+	};
+
 	render() {
 		return (
 			<div className='App'>
@@ -73,6 +78,7 @@ class App extends Component<IProps, IState> {
 									playlistType={'generated-playlist'}
 									selectedGenre={this.state.selectedGenre}
 									playlists={this.state.playlists}
+									toggleSaved={this.toggleSavedPlaylist}
 								/>
 							</section>
 						);
@@ -89,6 +95,7 @@ class App extends Component<IProps, IState> {
 								playlistType={'generated-playlist'}
 								selectedGenre={this.state.selectedGenre}
 								playlists={savedPlaylists}
+								toggleSaved={this.toggleSavedPlaylist}
 							/>
 						);
 					}}
