@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import Genre from '../Genre/Genre'
+import Genre from '../Genre/Genre';
+
+import './GenresList.scss'
 
 interface IProps {setAppGenre: (genre: string) => void, genres: string[]}
 
@@ -18,7 +20,7 @@ function GenresList(props: IProps) {
   }
 
   return (
-    <section>
+    <section className='genre-list'>
       {renderGenres()}
     </section>
   )
