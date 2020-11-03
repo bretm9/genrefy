@@ -3,15 +3,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: .1rem solid white;
+  border-radius: .5rem;
+  padding: 1rem;
 
   .generated-playlist-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    border-bottom: .1rem solid white;
+    width: 100%;
 
     .save {
-      height: 1.8rem;
+      height: 1.5rem;
+      margin-bottom: .5rem;
     }
+  }
+
+  .playlist-body {
+    border-bottom: .1rem solid white;
+    width: 100%;
   }
 }
