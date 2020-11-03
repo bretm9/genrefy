@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Genre.scss';
+
 interface IProps {
 	updateSelectedGenre: (genre: string) => void;
 	genre: string;
@@ -8,12 +10,13 @@ interface IProps {
 function Genre(props: IProps) {
 	return (
 		<section className='genre'>
-			<h1
+			<button 
+				type='button'
 				onClick={event =>
 					props.updateSelectedGenre(event.currentTarget.innerHTML)
 				}>
 				{props.genre}
-			</h1>
+			</button>
 		</section>
 	);
 }

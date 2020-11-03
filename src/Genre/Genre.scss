@@ -1,0 +1,17 @@
+.genre {
+  display: flex;
+  flex-wrap: wrap;
+  padding: .5rem;
+
+  button {
+    color: black;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    transition: .4s all;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+}
