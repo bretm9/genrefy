@@ -3,15 +3,38 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: .1rem solid white;
+  padding: 1rem;
+  width: 20rem;
+  overflow: hidden;
+  margin: 0 1rem 1rem 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
 
   .generated-playlist-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    border-bottom: .1rem solid white;
+    padding: 1rem;
+
+    a {
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
 
     .save {
-      height: 1.8rem;
+      height: 1.5rem;
+      margin-bottom: .5rem;
+    }
+  }
+
+  .playlist-body {
+    border-bottom: .1rem solid white;
+    width: 100%;
+
+    h3 {
+      font-size: 1.3rem;
     }
   }
 }
