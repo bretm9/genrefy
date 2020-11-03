@@ -1,7 +1,6 @@
 import React from 'react';
-import SavedPlaylist from '../SavedPlaylists/SavedPlaylist';
+
 import GeneratedPlaylist from '../GeneratedPlaylists/GeneratedPlaylist';
-// import CustomPlaylist from '../CustomPlaylists/CustomPlaylist';
 
 import { Playlist } from '../utils';
 
