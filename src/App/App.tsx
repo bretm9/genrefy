@@ -107,7 +107,7 @@ class App extends Component<IProps, IState> {
 							| undefined = this.state.playlists.find(playlist => {
 							return playlist.id === playlistId;
 						});
-						return <PlaylistDetails playlist={foundPlaylist} />;
+						return <PlaylistDetails playlist={foundPlaylist} toggleSaved={this.toggleSavedPlaylist} />;
 					}}
 				/>
 			</div>
