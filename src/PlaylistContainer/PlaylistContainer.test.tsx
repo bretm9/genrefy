@@ -3,9 +3,10 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import PlaylistContainer from './PlaylistContainer';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('PlaylistContainer', () => {
-  const playlistType = 'generated-playlist'
+  const mockToggleSaved = jest.fn()
   const selectedGenre = 'military western ska'
   const playlists = [ 
     {
@@ -55,10 +56,13 @@ describe('PlaylistContainer', () => {
   ]
 	beforeEach(() =>
 		render(
-      <PlaylistContainer 
-        playlistType={playlistType}
-        selectedGenre={selectedGenre} 
-        playlists={playlists} />
+      <MemoryRouter>
+        <PlaylistContainer 
+          selectedGenre={selectedGenre} 
+          playlists={playlists} 
+          toggleSaved={mockToggleSaved}
+        />
+      </MemoryRouter>
 		)
 	);
 	test('should render the genresList container to the screen', () => {

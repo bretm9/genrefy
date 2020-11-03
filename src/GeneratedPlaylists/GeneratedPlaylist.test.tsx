@@ -1,12 +1,15 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import GeneratedPlaylist from './GeneratedPlaylist';
+import { MemoryRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 
 describe('GeneratedPlaylist', () => {
-  const playlist = {
+  const mockToggleSaved = jest.fn()
+  const playlist1 = {
     id: 1,
     name: 'military western ska',
     isSaved: false,
@@ -33,14 +36,48 @@ describe('GeneratedPlaylist', () => {
       }
     ]
   }
+  const playlist2 = {
+    id: 1,
+    name: 'military western ska',
+    isSaved: true,
+    tracks: [
+      {
+        "mbid": "e2bad905-75a4-499d-bdea-2e916d73ad76",
+        "artist": {
+          "name": "Test artist",
+          "artistUrl": "https://www.last.fm/music/Sublime"
+        },
+        "duration": "208",
+        "songName": "Test song",
+        "songUrl": "https://www.last.fm/music/Sublime/_/Smoke+Two+Joints"
+      }
+    ]
+  }
   const selectedGenre = 'military western ska'
   beforeEach(() =>
 		render(
-      <GeneratedPlaylist selectedGenre={selectedGenre} playlist={playlist} />
+      <MemoryRouter>
+        <GeneratedPlaylist selectedGenre={selectedGenre} playlist={playlist1} toggleSaved={mockToggleSaved}/>
+      </MemoryRouter>
 		)
   );
   test('should render a generated playlist', () => {
     expect(screen.getByText('Smoke Two')).toBeInTheDocument();
     expect(screen.getByText('Forward March')).toBeInTheDocument();
-	});
+  });
+  test('should default a generated playlist to be unsaved', () => {
+    expect(screen.getByAltText('Save playlist')).toBeInTheDocument()
+  })
+  test('should allow a user to save playlist', () => {
+    userEvent.click(screen.getByAltText('Save playlist'))
+    expect(mockToggleSaved).toHaveBeenCalledWith(playlist1)
+  })
+  test('should have saved icon with a saved playlist', () => {
+    render(
+      <MemoryRouter>
+        <GeneratedPlaylist selectedGenre={selectedGenre} playlist={playlist2} toggleSaved={mockToggleSaved}/>
+      </MemoryRouter>
+		)
+    expect(screen.getByAltText('Unsave playlist')).toBeInTheDocument()
+  })
 });
