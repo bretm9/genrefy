@@ -1,0 +1,17 @@
+.generated-playlist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .generated-playlist-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .save {
+      height: 1.8rem;
+    }
+  }
+}
