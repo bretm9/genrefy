@@ -1,7 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Playlist } from '../utils';
 
-interface IProps { playlist: any }
+import savedPlaylist from '../images/saved-playlist.png';
+import unSavedPlaylist from '../images/unsaved-playlist.png';
+
+import './PlaylistDetails.scss';
+
+const savedPlaylistAlt = 'Save playlist';
+const unSavedplaylistAlt = 'Unsave playlist';
+
+interface IProps { playlist: any, toggleSaved: (playlist: Playlist) => void; }
 
 const displaySongs = (playlist: Playlist) => {
   return playlist.tracks.reduce((finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
@@ -19,7 +28,16 @@ const displaySongs = (playlist: Playlist) => {
 
 const PlaylistDetails = (props: IProps) => {
   return (
-    <section className="generated-playlist">
+    <section className="playlist-details">
+      <article className='playlist-details-head'>
+				<Link to={`/playlist/${props.playlist.id}`}>{props.playlist.name}</Link>
+				<img
+					src={props.playlist.isSaved ? savedPlaylist : unSavedPlaylist}
+					className='save'
+					alt={props.playlist.isSaved ? unSavedplaylistAlt : savedPlaylistAlt}
+					onClick={() => props.toggleSaved(props.playlist)}
+				/>
+			</article>
       <h1>{props.playlist.name}</h1>
       {displaySongs(props.playlist)}
     </section>
