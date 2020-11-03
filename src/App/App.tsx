@@ -58,14 +58,12 @@ class App extends Component<IProps, IState> {
 	render() {
 		return (
 			<div className='App'>
-				<h1>Genrefy</h1>
 				<Header />
 				<Route exact path='/' render={() => {
 					return (
-						<section className="testing">
+						<section className="app-main">
 							<GenresList setAppGenre={this.setAppGenre} genres={this.state.genres} />
 							<PlaylistContainer playlistType={'generated-playlist'} selectedGenre={this.state.selectedGenre} playlists={this.state.playlists} />
-							{/* <PlaylistContainer playlistType={'custom-playlist'} /> */}
 						</section>
 					)
 				}} />

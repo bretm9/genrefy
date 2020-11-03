@@ -1,10 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+import './Header.scss'
+
+import logo from '../images/genrefy-logo.png';
 
 function Header() {
   return (
     <section className='header'>
-      <h1>Header</h1>
+      <article className='logo-container'>
+        <Link to='/'><img className='logo' src={logo} alt="Genrefy"/></Link>
+        <h1>Genrefy</h1>
+      </article>
       <Link to='/saved'>View Saved</Link>
     </section>
   )

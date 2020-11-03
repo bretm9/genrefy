@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90vw;
+
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      width: 40%;
+      height: auto;
+    }
+  }
+
+
+  a {
+    outline: none;
+    text-decoration: none;
+    text-align: center;
+  }
+}
