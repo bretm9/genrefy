@@ -18,8 +18,8 @@ const displaySongs = (playlist: Playlist) => {
         <section key={index}>
           <h3>{currentSong.songName}</h3>
           <h3>{currentSong.artist.name}</h3>
-          <a target='_blank' href={currentSong.songUrl}>View song on Last FM</a>
-          <a target='_blank' href={currentSong.artist.artistUrl}>View Artist on Last FM</a>
+          <a data-testid={`song-url-${index}`} target='_blank' href={currentSong.songUrl}>View song on Last FM</a>
+          <a data-testid={`artist-url-${index}`}target='_blank' href={currentSong.artist.artistUrl}>View Artist on Last FM</a>
         </section>;
       finalSongs.push(songToDisplay)
     return finalSongs
