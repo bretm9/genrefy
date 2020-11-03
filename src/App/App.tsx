@@ -75,7 +75,6 @@ class App extends Component<IProps, IState> {
 									genres={this.state.genres}
 								/>
 								<PlaylistContainer
-									playlistType={'generated-playlist'}
 									selectedGenre={this.state.selectedGenre}
 									playlists={this.state.playlists}
 									toggleSaved={this.toggleSavedPlaylist}
@@ -92,7 +91,6 @@ class App extends Component<IProps, IState> {
 						);
 						return (
 							<PlaylistContainer
-								playlistType={'generated-playlist'}
 								selectedGenre={this.state.selectedGenre}
 								playlists={savedPlaylists}
 								toggleSaved={this.toggleSavedPlaylist}
