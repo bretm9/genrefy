@@ -22,6 +22,7 @@ const displaySongs = (playlist: Playlist) => {
 			const songToDisplay = (
 				<section key={index} className='playlist-body'>
 					<h3>{currentSong.songName}</h3>
+					<p className="artist-name">Artist: {currentSong.artist.name}</p>
 				</section>
 			);
 			finalSongs.push(songToDisplay);
