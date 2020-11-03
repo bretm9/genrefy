@@ -1,0 +1,9 @@
+.playlist-container {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  width: 90vw;
+  height: 80vh;
+  margin-left: 10rem;
+  overflow: scroll;
+}

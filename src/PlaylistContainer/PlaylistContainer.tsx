@@ -4,6 +4,8 @@ import GeneratedPlaylist from '../GeneratedPlaylists/GeneratedPlaylist';
 
 import { Playlist } from '../utils';
 
+import './PlaylistContainer.scss';
+
 interface IProps {
 	selectedGenre: string,
 	playlists: Playlist[] | [],
