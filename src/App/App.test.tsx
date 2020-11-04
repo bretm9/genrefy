@@ -168,21 +168,21 @@ describe('App', () => {
     expect(screen.getAllByText('View artist on Last FM')[0]).toBeInTheDocument()
   });
 
-  // test('should be able to star a in playlist details page', async () => {
-  //   (getGenres as jest.Mock).mockResolvedValue(mockGenres);
-  //   (getPlaylist as jest.Mock).mockResolvedValue(mockPlaylist1);
-  //   render(
-  //     <MemoryRouter>
-  //       <App />
-  //     </MemoryRouter>
-  //   );
-  //   const genreToClick: HTMLElement = await waitFor(() => screen.getByText('military western ska'))
-  //   userEvent.click(screen.getByText(genreToClick.innerHTML))
-  //   const playlistGenre: HTMLElement = await waitFor(() => screen.getByRole('link', { name: 'military western ska' }))
-  //   userEvent.click(playlistGenre)
-  //   const starToClick = await waitFor(() => screen.getByAltText('Save playlist'))
-  //   userEvent.click(starToClick)
-  //   userEvent.click(screen.getByText('View Saved'))
-  //   expect(screen.getByText('military western ska')).toBeInTheDocument()
-  // });
+  test('should be able to star a in playlist details page', async () => {
+    (getGenres as jest.Mock).mockResolvedValue(mockGenres);
+    (getPlaylist as jest.Mock).mockResolvedValue(mockPlaylist1);
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    const genreToClick: HTMLElement = await waitFor(() => screen.getByText('military western ska'))
+    userEvent.click(screen.getByText(genreToClick.innerHTML))
+    const playlistGenre: HTMLElement = await waitFor(() => screen.getByRole('link', { name: 'military western ska' }))
+    userEvent.click(playlistGenre)
+    const starToClick = await waitFor(() => screen.getByAltText('Save playlist'))
+    userEvent.click(starToClick)
+    userEvent.click(screen.getByText('View Saved'))
+    expect(screen.getByText('military western ska')).toBeInTheDocument()
+  });
 });
