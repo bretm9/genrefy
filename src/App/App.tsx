@@ -16,6 +16,7 @@ interface IState {
 	genres: [];
 	playlists: Playlist[] | [];
 	selectedGenre: string;
+	error: string
 }
 
 class App extends Component<IProps, IState> {
@@ -25,6 +26,7 @@ class App extends Component<IProps, IState> {
 			genres: [],
 			playlists: [],
 			selectedGenre: '',
+			error: ''
 		};
 	}
 
@@ -35,9 +37,16 @@ class App extends Component<IProps, IState> {
 	setAppGenre = (genre: string) => {
 		this.setState({ selectedGenre: genre });
 		const splitGenreArray = this.parseGenreForFetch(genre);
-		getPlaylist(splitGenreArray).then(data =>
-			this.setState({ playlists: [...this.state.playlists, data] })
-		);
+		getPlaylist(splitGenreArray).then(data => {
+			if (data.tracks.length) {
+				this.setState({ playlists: [...this.state.playlists, data], error: "" })
+			} else {
+				this.setState({ error: "This genre didn't find any songs!" })
+				setTimeout(() => {
+					this.setState({ error: "" })
+				}, 3000)
+			}
+		});
 	};
 
 	parseGenreForFetch = (genre: string) => {
@@ -64,6 +73,7 @@ class App extends Component<IProps, IState> {
 		return (
 			<div className='App'>
 				<Header />
+				{this.state.error && <h1>{this.state.error}</h1>}
 				<Route
 					exact
 					path='/'
