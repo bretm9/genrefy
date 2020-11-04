@@ -10,42 +10,55 @@ import App from './App';
 
 jest.mock('../apiCalls')
 
-const mockGenres: string[] = [
-  'new orleans brass',
-  'nerdcore',
-  'kindermotown',
-  'military western ska'
-]
 
-const mockPlaylist1: Playlist = {
-  id: 1,
-  name: 'military western ska',
-  isSaved: false,
-  tracks: [
-    {
-      "mbid": "e2bad905-75a4-499d-bdea-2e916d73ad76",
-      "artist": {
-        "name": "Sublime",
-        "artistUrl": "https://www.last.fm/music/Sublime"
-      },
-      "duration": "208",
-      "songName": "Smoke Two",
-      "songUrl": "https://www.last.fm/music/Sublime/_/Smoke+Two+Joints"
-    },
-    {
-      "mbid": "86906b91-fdbd-4407-bcf1-6105f42525e5",
-      "artist": {
-        "name": "Pat Metheny Group",
-        "artistUrl": "https://www.last.fm/music/Pat+Metheny+Group"
-      },
-      "duration": "167",
-      "songName": "Forward March",
-      "songUrl": "https://www.last.fm/music/Pat+Metheny+Group/_/Forward+March"
-    }
-  ]
-}
 
 describe('App', () => {
+  let mockGenres: string[], mockPlaylist1: Playlist, mockPlaylist2: Playlist
+  beforeEach(() => {
+    mockGenres= [
+      'new orleans brass',
+      'nerdcore',
+      'kindermotown',
+      'military western ska',
+      'music-genre-that-does-not-exist'
+    ]
+    
+    mockPlaylist1 = {
+      id: 1,
+      name: 'military western ska',
+      isSaved: false,
+      tracks: [
+        {
+          "mbid": "e2bad905-75a4-499d-bdea-2e916d73ad76",
+          "artist": {
+            "name": "Sublime",
+            "artistUrl": "https://www.last.fm/music/Sublime"
+          },
+          "duration": "208",
+          "songName": "Smoke Two",
+          "songUrl": "https://www.last.fm/music/Sublime/_/Smoke+Two+Joints"
+        },
+        {
+          "mbid": "86906b91-fdbd-4407-bcf1-6105f42525e5",
+          "artist": {
+            "name": "Pat Metheny Group",
+            "artistUrl": "https://www.last.fm/music/Pat+Metheny+Group"
+          },
+          "duration": "167",
+          "songName": "Forward March",
+          "songUrl": "https://www.last.fm/music/Pat+Metheny+Group/_/Forward+March"
+        }
+      ]
+    }
+    
+    mockPlaylist2 = {
+      id: 1,
+      name: 'music-genre-that-does-not-exist',
+      isSaved: false,
+      tracks: []
+    }
+  })
+  
   test('should render Header to the page', () => {
     (getGenres as jest.Mock).mockResolvedValue(mockGenres)
     render(
@@ -84,6 +97,20 @@ describe('App', () => {
     const playlistTitle1 = await waitFor(() => screen.getByText('Forward March'))
     expect(playlistTitle1).toBeInTheDocument();
   });
+
+  test('should display error if no songs are found for a generated playlist', async () => {
+    (getGenres as jest.Mock).mockResolvedValue(mockGenres);
+    (getPlaylist as jest.Mock).mockResolvedValue(mockPlaylist2);
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    const genreToClick: HTMLElement = await waitFor(() => screen.getByText('music-genre-that-does-not-exist'))
+    userEvent.click(screen.getByText(genreToClick.innerHTML))
+    const error = await waitFor(() => screen.getByText('This genre didn\'t find any songs!'))
+    expect(error).toBeInTheDocument()
+  })
 
   test('switching to the saved view should remove the generated genres from the screen', async () => {
     (getGenres as jest.Mock).mockResolvedValue(mockGenres);
@@ -140,4 +167,22 @@ describe('App', () => {
     expect(screen.getAllByText('View song on Last FM')[0]).toBeInTheDocument()
     expect(screen.getAllByText('View artist on Last FM')[0]).toBeInTheDocument()
   });
+
+  // test('should be able to star a in playlist details page', async () => {
+  //   (getGenres as jest.Mock).mockResolvedValue(mockGenres);
+  //   (getPlaylist as jest.Mock).mockResolvedValue(mockPlaylist1);
+  //   render(
+  //     <MemoryRouter>
+  //       <App />
+  //     </MemoryRouter>
+  //   );
+  //   const genreToClick: HTMLElement = await waitFor(() => screen.getByText('military western ska'))
+  //   userEvent.click(screen.getByText(genreToClick.innerHTML))
+  //   const playlistGenre: HTMLElement = await waitFor(() => screen.getByRole('link', { name: 'military western ska' }))
+  //   userEvent.click(playlistGenre)
+  //   const starToClick = await waitFor(() => screen.getByAltText('Save playlist'))
+  //   userEvent.click(starToClick)
+  //   userEvent.click(screen.getByText('View Saved'))
+  //   expect(screen.getByText('military western ska')).toBeInTheDocument()
+  // });
 });
