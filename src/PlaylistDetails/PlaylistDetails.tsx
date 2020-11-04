@@ -16,15 +16,13 @@ const displaySongs = (playlist: Playlist) => {
   return playlist.tracks.reduce((finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
       const songToDisplay = 
         <section key={index} className='playlist-details-body'>
-          <section className="artist-left">
-            <h3>{currentSong.songName}</h3>
-            <h3>{currentSong.artist.name}</h3>
-          </section>
-          <section className="artist-right">
+          <h3 className='artist-name'>{currentSong.songName}</h3>
+          <h3>By: {currentSong.artist.name}</h3>
+          <article className="playlist-details-url">
             <a data-testid={`song-url-${index}`} target='_blank' rel='noreferrer' href={currentSong.songUrl}>View song on Last FM</a>
             <a data-testid={`artist-url-${index}`}target='_blank' rel='noreferrer' href={currentSong.artist.artistUrl}>View Artist on Last FM</a>
-          </section>
-        </section>;
+          </article>
+        </section>
       finalSongs.push(songToDisplay)
     return finalSongs
   }, [])
@@ -34,7 +32,7 @@ const PlaylistDetails = (props: IProps) => {
   return (
     <section className="playlist-details">
       <article className='playlist-details-head'>
-				<Link to={`/playlist/${props.playlist.id}`}>{props.playlist.name}</Link>
+        <Link to={`/playlist/${props.playlist.id}`}><h1 className='playlist-name'>{props.playlist.name}</h1></Link>
 				<img
 					src={props.playlist.isSaved ? savedPlaylist : unSavedPlaylist}
 					className='save'
@@ -42,7 +40,6 @@ const PlaylistDetails = (props: IProps) => {
 					onClick={() => props.toggleSaved(props.playlist)}
 				/>
 			</article>
-      <h1>{props.playlist.name}</h1>
       {displaySongs(props.playlist)}
     </section>
   )
