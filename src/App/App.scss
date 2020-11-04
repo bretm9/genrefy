@@ -5,11 +5,11 @@
   align-items: center;
   background: url(../images/main-background.jpg) no-repeat center;
   background-size: cover;
-  height: 100%;
-}
+  min-height: 100vh;
 
-.app-main {
-  display: flex;
-  justify-content: space-between;
-  width: 95vw;
+  .app-main {
+    display: flex;
+    justify-content: space-between;
+    width: 95vw;
+  }
 }
