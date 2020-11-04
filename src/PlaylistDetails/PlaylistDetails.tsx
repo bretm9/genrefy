@@ -32,7 +32,7 @@ const PlaylistDetails = (props: IProps) => {
   return (
     <section className="playlist-details">
       <article className='playlist-details-head'>
-        <Link to={`/playlist/${props.playlist.id}`}><h1 className='playlist-name'>{props.playlist.name}</h1></Link>
+        <h1 className='playlist-name'>{props.playlist.name}</h1>
 				<img
 					src={props.playlist.isSaved ? savedPlaylist : unSavedPlaylist}
 					className='save'
