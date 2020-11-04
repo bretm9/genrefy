@@ -20,7 +20,7 @@ interface IState {
 }
 
 class App extends Component<IProps, IState> {
-	constructor(props: any) {
+	constructor(props: IProps) {
 		super(props);
 		this.state = {
 			genres: [],
