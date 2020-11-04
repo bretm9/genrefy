@@ -34,7 +34,6 @@ describe('App', () => {
             "name": "Sublime",
             "artistUrl": "https://www.last.fm/music/Sublime"
           },
-          "duration": "208",
           "songName": "Smoke Two",
           "songUrl": "https://www.last.fm/music/Sublime/_/Smoke+Two+Joints"
         },
@@ -44,7 +43,6 @@ describe('App', () => {
             "name": "Pat Metheny Group",
             "artistUrl": "https://www.last.fm/music/Pat+Metheny+Group"
           },
-          "duration": "167",
           "songName": "Forward March",
           "songUrl": "https://www.last.fm/music/Pat+Metheny+Group/_/Forward+March"
         }
