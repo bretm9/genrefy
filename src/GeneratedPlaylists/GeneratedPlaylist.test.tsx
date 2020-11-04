@@ -10,7 +10,7 @@ import userEvent from '@testing-library/user-event';
 describe('GeneratedPlaylist', () => {
   const mockToggleSaved = jest.fn()
   const playlist1 = {
-    id: 1,
+    id: 0,
     name: 'military western ska',
     isSaved: false,
     tracks: [
@@ -57,7 +57,7 @@ describe('GeneratedPlaylist', () => {
   beforeEach(() =>
 		render(
       <MemoryRouter>
-        <GeneratedPlaylist selectedGenre={selectedGenre} playlist={playlist1} toggleSaved={mockToggleSaved}/>
+        <GeneratedPlaylist playlistIndex={0} selectedGenre={selectedGenre} playlist={playlist1} toggleSaved={mockToggleSaved}/>
       </MemoryRouter>
 		)
   );
@@ -75,7 +75,7 @@ describe('GeneratedPlaylist', () => {
   test('should have saved icon with a saved playlist', () => {
     render(
       <MemoryRouter>
-        <GeneratedPlaylist selectedGenre={selectedGenre} playlist={playlist2} toggleSaved={mockToggleSaved}/>
+        <GeneratedPlaylist playlistIndex={0} selectedGenre={selectedGenre} playlist={playlist2} toggleSaved={mockToggleSaved}/>
       </MemoryRouter>
 		)
     expect(screen.getByAltText('Unsave playlist')).toBeInTheDocument()
