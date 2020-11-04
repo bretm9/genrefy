@@ -152,6 +152,24 @@ describe('App', () => {
     expect(playlistToCheck).toBeInTheDocument();
   });
 
+  test('should be able to remove a saved a playlist while in the saved route and see it disappear', async () => {
+    (getGenres as jest.Mock).mockResolvedValue(mockGenres);
+    (getPlaylist as jest.Mock).mockResolvedValue(mockPlaylist1);
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    const genreToClick: HTMLElement = await waitFor(() => screen.getByText('military western ska'))
+    userEvent.click(screen.getByText(genreToClick.innerHTML))
+    const firstStarToClick = await waitFor(() => screen.getByTestId('playlist-star-0'))
+    userEvent.click(firstStarToClick)
+    userEvent.click(screen.getByText('View Saved'))
+    const secondStarToClick = await waitFor(() => screen.getByTestId('playlist-star-0'))
+    userEvent.click(secondStarToClick)
+    expect(screen.getByText('Add a playlist!')).toBeInTheDocument();
+  });
+
   test('should be able to navigate to playlist details page after creating a playlist', async () => {
     (getGenres as jest.Mock).mockResolvedValue(mockGenres);
     (getPlaylist as jest.Mock).mockResolvedValue(mockPlaylist1);
