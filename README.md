@@ -55,15 +55,15 @@
 
   The homepage consists of randomly generated genres which when clicked will generate a new playlist based on the clicked genre. Theses playlists can be saved by clicking the star icon, or viewed in more detail by clicking the title. As far as styling, the homepage is organized in a clean structure, with the random genres on the left, and the container for generated playlists on the right. We sorted it this way for readibility and accessibility.
 
-  <!-- Image of homepage -->
+  <img width="840" alt="Homepage" src="https://user-images.githubusercontent.com/14350203/98176854-99507480-1eb6-11eb-99eb-936974ecec4c.png">
 
   Clicking the `View Saved` button will link to the saved playlists view. This view is very similar to the playlist container on the homepage, except it only shows saved playlists. If you unstar a saved playlist in this view, it will disappear from the page. If you click the title of a playlist, it will open into the playlist details view. This playlist container is front and center since it is all that appears on the page.
 
-  <!-- Image of View Saved -->
+<img width="840" alt="View Saved" src="https://user-images.githubusercontent.com/14350203/98176913-b8e79d00-1eb6-11eb-9d78-26aba270b9fc.png">
 
   Each playlist has a title, which when clicked, links to the details view for that playlist. This view is an expanded version of the playlist for better readibility, and includes links to the song and artist pages on Last FM. You can also save the playlist in this view by clicking the star. 
 
-  <!-- Image of playlist details -->
+  <img width="840" alt="Playlist Details" src="https://user-images.githubusercontent.com/14350203/98176932-c3a23200-1eb6-11eb-9f88-d9de485db630.png">
 
 > [Back to the top](#genrefy)
 ---
