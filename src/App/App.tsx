@@ -50,7 +50,7 @@ class App extends Component<IProps, IState> {
 	};
 
 	parseGenreForFetch = (genre: string) => {
-		const fillerWordsToRemove = /(the |and |of |\/| |ism)+/;
+		const fillerWordsToRemove = /(the |and |amp; |of |\/| |ism)+/;
 		const parseGenreArray = genre.split(fillerWordsToRemove);
 		if (parseGenreArray.includes('')) {
 			const index = parseGenreArray.indexOf('');
