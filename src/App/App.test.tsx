@@ -17,7 +17,7 @@ const mockGenres: string[] = [
   'military western ska'
 ]
 
-const mockPlaylist: Playlist = {
+const mockPlaylist1: Playlist = {
   id: 1,
   name: 'military western ska',
   isSaved: false,
@@ -53,7 +53,7 @@ describe('App', () => {
         <App />
       </MemoryRouter>
     );
-    expect(screen.getByText('Header')).toBeInTheDocument();
+    expect(screen.getByText('Genrefy')).toBeInTheDocument();
   });
 
   test('should render genres to the page', async () => {
@@ -72,7 +72,7 @@ describe('App', () => {
 
   test('should render generated playlist to the page', async () => {
     (getGenres as jest.Mock).mockResolvedValue(mockGenres);
-    (getPlaylist as jest.Mock).mockResolvedValue(mockPlaylist);
+    (getPlaylist as jest.Mock).mockResolvedValue(mockPlaylist1);
     render(
       <MemoryRouter>
         <App />
@@ -83,5 +83,45 @@ describe('App', () => {
     userEvent.click(screen.getByText(genreToClick.innerHTML))
     const playlistTitle1 = await waitFor(() => screen.getByText('Forward March'))
     expect(playlistTitle1).toBeInTheDocument();
+  });
+
+  test('switching to the saved view should remove the generated genres from the screen', async () => {
+    (getGenres as jest.Mock).mockResolvedValue(mockGenres);
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    const genreNotToClick: HTMLElement = await waitFor(() => screen.getByText('military western ska'))
+    userEvent.click(screen.getByText('View Saved'))
+    expect(genreNotToClick).not.toBeInTheDocument();
+  });
+
+  test('should be able to switch to the saved view and see that no playlists have been added', () => {
+    (getGenres as jest.Mock).mockResolvedValue(mockGenres);
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    userEvent.click(screen.getByText('View Saved'))
+    expect(screen.getByText('Add a playlist!')).toBeInTheDocument();
+  });
+
+  test('Should be able to save a playlist and view it in the saved route', async () => {
+    (getGenres as jest.Mock).mockResolvedValue(mockGenres);
+    (getPlaylist as jest.Mock).mockResolvedValue(mockPlaylist1);
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    const genreToClick: HTMLElement = await waitFor(() => screen.getByText('military western ska'))
+    userEvent.click(screen.getByText(genreToClick.innerHTML))
+    const starToClick = await waitFor(() => screen.getByTestId('playlist-star-0'))
+    userEvent.click(starToClick)
+    userEvent.click(screen.getByText('View Saved'))
+    const playlistToClick: HTMLElement = await waitFor(() => screen.getByRole('link', { name: 'military western ska' }))
+    expect(playlistToClick).toBeInTheDocument();
   });
 });
