@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Playlist } from '../utils';
+import { Playlist } from '../utils/utils';
 
 import savedPlaylist from '../images/saved-playlist.png';
 import unSavedPlaylist from '../images/unsaved-playlist.png';
 
+import '../utils/_mixin.scss';
+import '../utils/_variables.scss';
 import './PlaylistDetails.scss';
 
 const savedPlaylistAlt = 'Save playlist';

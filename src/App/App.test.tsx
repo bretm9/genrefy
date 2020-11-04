@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 
-import { Playlist } from '../utils'
+import { Playlist } from '../utils/utils'
 import { getGenres, getPlaylist } from '../apiCalls'
 import App from './App';
 

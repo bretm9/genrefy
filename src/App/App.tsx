@@ -9,7 +9,7 @@ import PlaylistDetails from '../PlaylistDetails/PlaylistDetails';
 
 import { getPlaylist, getGenres } from '../apiCalls';
 
-import { Playlist } from '../utils';
+import { Playlist } from '../utils/utils';
 
 interface IProps {}
 interface IState {
