@@ -92,9 +92,9 @@ describe('App', () => {
         <App />
       </MemoryRouter>
     );
-    const genrenNotToClick: HTMLElement = await waitFor(() => screen.getByText('military western ska'))
+    const genreNotToClick: HTMLElement = await waitFor(() => screen.getByText('military western ska'))
     userEvent.click(screen.getByText('View Saved'))
-    expect(genrenNotToClick).not.toBeInTheDocument();
+    expect(genreNotToClick).not.toBeInTheDocument();
   });
 
   test('should be able to switch to the saved view and see that no playlists have been added', () => {
