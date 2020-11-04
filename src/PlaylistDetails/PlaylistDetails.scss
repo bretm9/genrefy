@@ -1,0 +1,44 @@
+.playlist-details {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  place-items: left;
+  width: 90vw;
+  border: .1rem solid white;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+
+  .playlist-name {
+    font-size: 2.2rem;
+  }
+
+  .playlist-details-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 4;
+
+    img {
+      width: 1.5rem;
+      margin-left: 1rem;
+    }
+  }
+
+  .playlist-details-body {
+    margin: 1rem;
+
+    .artist-name {
+      font-size: 1.6rem;
+    }
+
+    .playlist-details-url {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        margin: .5rem 0;
+      }
+    }
+  }
+}
