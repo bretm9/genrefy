@@ -15,11 +15,15 @@ interface IProps { playlist: any, toggleSaved: (playlist: Playlist) => void; }
 const displaySongs = (playlist: Playlist) => {
   return playlist.tracks.reduce((finalSongs: JSX.Element[], currentSong, index: number): JSX.Element[] => {
       const songToDisplay = 
-        <section key={index}>
-          <h3>{currentSong.songName}</h3>
-          <h3>{currentSong.artist.name}</h3>
-          <a data-testid={`song-url-${index}`} target='_blank' rel='noreferrer' href={currentSong.songUrl}>View song on Last FM</a>
-          <a data-testid={`artist-url-${index}`}target='_blank' rel='noreferrer' href={currentSong.artist.artistUrl}>View Artist on Last FM</a>
+        <section key={index} className='playlist-details-body'>
+          <section className="artist-left">
+            <h3>{currentSong.songName}</h3>
+            <h3>{currentSong.artist.name}</h3>
+          </section>
+          <section className="artist-right">
+            <a data-testid={`song-url-${index}`} target='_blank' rel='noreferrer' href={currentSong.songUrl}>View song on Last FM</a>
+            <a data-testid={`artist-url-${index}`}target='_blank' rel='noreferrer' href={currentSong.artist.artistUrl}>View Artist on Last FM</a>
+          </section>
         </section>;
       finalSongs.push(songToDisplay)
     return finalSongs
