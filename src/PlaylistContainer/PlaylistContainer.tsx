@@ -15,8 +15,10 @@ interface IProps {
 const displayPlaylist = (playlists: any, selectedGenre: string, toggleSavedPlaylist: (playlist: Playlist) => void) => {
 	if (playlists.length) {
 		return playlists.map((playlist: Playlist, index: number) => {
-			return <GeneratedPlaylist key={index} selectedGenre={selectedGenre} playlist={playlist} toggleSaved={toggleSavedPlaylist} />
+			return <GeneratedPlaylist key={index} playlistIndex={index} selectedGenre={selectedGenre} playlist={playlist} toggleSaved={toggleSavedPlaylist} />
 		})
+	} else {
+		return <h1 className='add-playlist'>Add a playlist!</h1>
 	}
 };
 
