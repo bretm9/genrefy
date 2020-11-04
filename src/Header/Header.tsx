@@ -10,9 +10,9 @@ function Header() {
     <section className='header'>
       <article className='logo-container'>
         <Link to='/'><img className='logo' src={logo} alt="Genrefy"/></Link>
-        <h1>Genrefy</h1>
+        <Link to='/'><h1>Genrefy</h1></Link>
       </article>
-      <Link to='/saved'>View Saved</Link>
+      <Link to='/saved' className='view-saved'>View Saved</Link>
     </section>
   )
 }

@@ -9,7 +9,7 @@ import PlaylistDetails from '../PlaylistDetails/PlaylistDetails';
 
 import { getPlaylist, getGenres } from '../apiCalls';
 
-import { Playlist } from '../utils';
+import { Playlist } from '../utils/utils';
 
 interface IProps {}
 interface IState {
@@ -20,7 +20,7 @@ interface IState {
 }
 
 class App extends Component<IProps, IState> {
-	constructor(props: any) {
+	constructor(props: IProps) {
 		super(props);
 		this.state = {
 			genres: [],
@@ -50,7 +50,7 @@ class App extends Component<IProps, IState> {
 	};
 
 	parseGenreForFetch = (genre: string) => {
-		const fillerWordsToRemove = /(the |and |of |\/| |ism)+/;
+		const fillerWordsToRemove = /(the |and |amp; |of |\/| |ism)+/;
 		const parseGenreArray = genre.split(fillerWordsToRemove);
 		if (parseGenreArray.includes('')) {
 			const index = parseGenreArray.indexOf('');

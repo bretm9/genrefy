@@ -2,7 +2,7 @@ import React from 'react';
 
 import GeneratedPlaylist from '../GeneratedPlaylists/GeneratedPlaylist';
 
-import { Playlist } from '../utils';
+import { Playlist } from '../utils/utils';
 
 import './PlaylistContainer.scss';
 

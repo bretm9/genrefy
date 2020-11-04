@@ -1,8 +1,19 @@
+@import '../utils/_mixin';
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 90vw;
+
+  h1 {
+    font-size: 2.3rem;
+    border: .1rem solid transparent;
+
+    &:hover {
+      @include skyblue-hover();
+    }
+  }
 
   .logo-container {
     display: flex;
@@ -16,11 +27,16 @@
     }
   }
 
-
   a {
     outline: none;
     text-decoration: none;
     text-align: center;
-    font-size: 1.8rem
+    font-size: 1.8rem;
+  }
+
+  .view-saved {
+    &:hover {
+      @include skyblue-hover();
+    }
   }
 }
