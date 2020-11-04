@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Playlist } from '../utils/utils';
 
 import savedPlaylist from '../images/saved-playlist.png';
