@@ -11,6 +11,7 @@ const savedPlaylistAlt = 'Save playlist';
 const unSavedplaylistAlt = 'Unsave playlist';
 
 interface IProps {
+	playlistIndex: number;
 	selectedGenre: string;
 	playlist: Playlist;
 	toggleSaved: (playlist: Playlist) => void;
@@ -38,6 +39,7 @@ const GeneratedPlaylist = (props: IProps) => {
 			<article className='generated-playlist-head'>
 				<Link to={`/playlist/${props.playlist.id}`}>{props.playlist.name}</Link>
 				<img
+					data-testid={`playlist-star-${props.playlistIndex}`}
 					src={props.playlist.isSaved ? savedPlaylist : unSavedPlaylist}
 					className='save'
 					alt={props.playlist.isSaved ? unSavedplaylistAlt : savedPlaylistAlt}
