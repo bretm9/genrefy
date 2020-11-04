@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
-import { Route } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import GenresList from '../GenresList/GenresList';
@@ -74,52 +74,57 @@ class App extends Component<IProps, IState> {
 			<div className='App'>
 				<Header />
 				{this.state.error && <h1>{this.state.error}</h1>}
-				<Route
-					exact
-					path='/'
-					render={() => {
-						return (
-							<section className='app-main'>
-								<GenresList
-									setAppGenre={this.setAppGenre}
-									genres={this.state.genres}
-								/>
+				<Switch>
+					<Route
+						exact
+						path='/'
+						render={() => {
+							return (
+								<section className='app-main'>
+									<GenresList
+										setAppGenre={this.setAppGenre}
+										genres={this.state.genres}
+									/>
+									<PlaylistContainer
+										selectedGenre={this.state.selectedGenre}
+										playlists={this.state.playlists}
+										toggleSaved={this.toggleSavedPlaylist}
+									/>
+								</section>
+							);
+						}}
+					/>
+					<Route
+						path='/saved'
+						render={() => {
+							const savedPlaylists: Playlist[] | [] = this.state.playlists.filter(
+								playlist => playlist.isSaved
+							);
+							return (
 								<PlaylistContainer
 									selectedGenre={this.state.selectedGenre}
-									playlists={this.state.playlists}
+									playlists={savedPlaylists}
 									toggleSaved={this.toggleSavedPlaylist}
 								/>
-							</section>
-						);
-					}}
-				/>
-				<Route
-					path='/saved'
-					render={() => {
-						const savedPlaylists: Playlist[] | [] = this.state.playlists.filter(
-							playlist => playlist.isSaved
-						);
-						return (
-							<PlaylistContainer
-								selectedGenre={this.state.selectedGenre}
-								playlists={savedPlaylists}
-								toggleSaved={this.toggleSavedPlaylist}
-							/>
-						);
-					}}
-				/>
-				<Route
-					path='/playlist/:id'
-					render={({ match }) => {
-						const playlistId: number = +match.params.id;
-						const foundPlaylist:
-							| Playlist
-							| undefined = this.state.playlists.find(playlist => {
-							return playlist.id === playlistId;
-						});
-						return <PlaylistDetails playlist={foundPlaylist} toggleSaved={this.toggleSavedPlaylist} />;
-					}}
-				/>
+							);
+						}}
+					/>
+					<Route
+						path='/playlist/:id'
+						render={({ match }) => {
+							const playlistId: number = +match.params.id;
+							const foundPlaylist: Playlist | undefined = this.state.playlists.find(playlist => {
+								return playlist.id === playlistId;
+							});
+							if (foundPlaylist) {
+								return <PlaylistDetails playlist={foundPlaylist} toggleSaved={this.toggleSavedPlaylist} />;
+							} else {
+								return <Redirect to="/" />
+							}
+						}}
+					/>
+					<Redirect to="/" />
+				</Switch>
 			</div>
 		);
 	}
