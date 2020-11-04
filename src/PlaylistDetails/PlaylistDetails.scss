@@ -1,3 +1,6 @@
+@import '../utils/mixin';
+@import '../utils//variables';
+
 .playlist-details {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -18,9 +21,7 @@
     border-bottom: .1rem solid transparent;
 
     &:hover {
-      color: skyblue;
-      border-bottom: .1rem solid skyblue;
-      cursor: pointer;
+      @include skyblue-hover();
     }
   }
 
@@ -46,7 +47,7 @@
     margin: 1rem;
 
     h3:first-child {
-      color: #e38c34;
+      color: $orange-title;
       font-size: 1.6rem;
     }
 
@@ -64,7 +65,7 @@
         margin: .5rem 0;
 
         &:hover {
-          color: skyblue;
+          @include skyblue-hover();
           text-decoration: underline;
         }
       }

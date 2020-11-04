@@ -1,0 +1,5 @@
+@mixin skyblue-hover() {
+  color: skyblue;
+  border-bottom: .1rem solid skyblue;
+  cursor: pointer;
+}
