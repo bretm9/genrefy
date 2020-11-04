@@ -25,7 +25,7 @@ describe('Genre', () => {
 	});
 
 	test('should update selected genre when clicked', () => {
-		userEvent.click(screen.getByRole('heading', { name: 'jesus funk' }));
+		userEvent.click(screen.getByRole('button', { name: 'jesus funk' }));
 		expect(mockSelectedGenre).toHaveBeenCalledTimes(1);
 		expect(mockSelectedGenre).toHaveBeenCalledWith('jesus funk');
 	});
