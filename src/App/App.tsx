@@ -31,7 +31,13 @@ class App extends Component<IProps, IState> {
 	}
 
 	componentDidMount = () => {
-		getGenres().then(data => this.setState({ genres: data }));
+		getGenres().then(data => {
+			if (data === 'error') {
+				this.setState({ error: 'We were not able to fetch the genres. Refresh the page to try again.' });
+			} else {
+				this.setState({ genres: data, error: '' });
+			}
+		});
 	};
 
 	setAppGenre = (genre: string) => {
