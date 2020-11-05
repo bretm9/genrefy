@@ -44,7 +44,9 @@ class App extends Component<IProps, IState> {
 		this.setState({ selectedGenre: genre });
 		const splitGenreArray = this.parseGenreForFetch(genre);
 		getPlaylist(splitGenreArray).then(data => {
-			if (data.tracks.length) {
+			if (data === 'error') {
+				this.setState({ error: 'We were not able to fetch any playlist. Please refresh the page to try again.'})
+			} else if (data.tracks.length) {
 				this.setState({ playlists: [...this.state.playlists, data], error: "" })
 			} else {
 				this.setState({ error: "This genre didn't find any songs!" })
