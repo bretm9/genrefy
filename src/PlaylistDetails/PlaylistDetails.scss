@@ -61,6 +61,7 @@
 
         &:hover {
           @include skyblue-hover();
+          border-bottom: none;
           text-decoration: underline;
         }
       }
