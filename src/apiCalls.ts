@@ -5,16 +5,29 @@ const apiUrl = `https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=`
 export const getGenres = () => {
   return (
     fetch('https://binaryjazz.us/wp-json/genrenator/v1/genre/25')
-      .then(response => response.json()) 
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw Error
+        }
+      })
+      .catch(() => 'error')
   )
 }
 
-export const getPlaylist = (genreArray: string[]) => {
+export const getPlaylist = (genreArray: string[]): Promise<any> => {
   return (
     Promise.all(
       genreArray.map(genre => {
         return fetch(`${apiUrl}${genre}&api_key=${process.env.REACT_APP_LASTFM_APIKEY}&limit=100&format=json`)
-          .then(response => response.json())
+          .then(response => {
+            if(response.ok) {
+              return response.json()
+            } else {
+              throw Error
+            }
+          })
       })
     )
     .then(data => {
@@ -32,5 +45,6 @@ export const getPlaylist = (genreArray: string[]) => {
       combinedPlaylist.tracks = randomPlaylist.filter((_playlist, index) => index < 15);
       return combinedPlaylist;
     })
+    .catch(() => 'error')
   )
 }
