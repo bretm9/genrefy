@@ -1,6 +1,6 @@
 # Genrefy
 
-> A Front-End Project by [Bret Merritt](https://github.com/bretm9) [Nathan Darrington](https://github.com/npdarrington) and [Carlyle "Dougie" Douglas](https://github.com/DougieDev)
+> A Front-End Project by [Bret Merritt](https://github.com/bretm9), [Nathan Darrington](https://github.com/npdarrington) and [Carlyle "Dougie" Douglas](https://github.com/DougieDev)
 <!-- > [Link to project]() -->
 ---
 ## Contents
