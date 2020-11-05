@@ -212,4 +212,18 @@ describe('App', () => {
     const failMessage = await waitFor(() => screen.getByText('We were not able to fetch the genres. Refresh the page to try again.'))
     expect(failMessage).toBeInTheDocument();
   });
+
+  test('should return a failed message if fetch call for GeneratedPlaylist fails', async () => {
+    (getGenres as jest.Mock).mockResolvedValue(mockGenres);
+    (getPlaylist as jest.Mock).mockResolvedValue('error');
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    const genreToClick: HTMLElement = await waitFor(() => screen.getByText('military western ska'))
+    userEvent.click(genreToClick);
+    const failMessage = await waitFor(() => screen.getByText('We were not able to fetch any playlist. Please refresh the page to try again.'));
+    expect(failMessage).toBeInTheDocument();
+  });
 });
