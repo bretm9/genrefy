@@ -16,12 +16,18 @@ export const getGenres = () => {
   )
 }
 
-export const getPlaylist = (genreArray: string[]) => {
+export const getPlaylist = (genreArray: string[]): Promise<any> => {
   return (
     Promise.all(
       genreArray.map(genre => {
         return fetch(`${apiUrl}${genre}&api_key=${process.env.REACT_APP_LASTFM_APIKEY}&limit=100&format=json`)
-          .then(response => response.json())
+          .then(response => {
+            if(response.ok) {
+              return response.json()
+            } else {
+              throw Error
+            }
+          })
       })
     )
     .then(data => {
@@ -39,5 +45,6 @@ export const getPlaylist = (genreArray: string[]) => {
       combinedPlaylist.tracks = randomPlaylist.filter((_playlist, index) => index < 15);
       return combinedPlaylist;
     })
+    .catch(() => 'error')
   )
 }
