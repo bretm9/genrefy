@@ -5,7 +5,14 @@ const apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=`;
 export const getGenres = () => {
   return (
     fetch('https://binaryjazz.us/wp-json/genrenator/v1/genre/25')
-      .then(response => response.json()) 
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw Error
+        }
+      })
+      .catch(() => 'error')
   )
 }
 
