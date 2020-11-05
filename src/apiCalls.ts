@@ -1,6 +1,6 @@
 import { cleanGenreTrackData, Playlist, AlbumTrack, randomizeSongs } from './utils/utils'
 
-const apiUrl = `http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=`;
+const apiUrl = `https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=`;
 
 export const getGenres = () => {
   return (
