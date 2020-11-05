@@ -201,4 +201,15 @@ describe('App', () => {
     userEvent.click(screen.getByText('View Saved'))
     expect(screen.getByText('military western ska')).toBeInTheDocument()
   });
+
+  test('should return a failed message if fetch call for genres fails', async () => {
+    (getGenres as jest.Mock).mockResolvedValue('error');
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    const failMessage = await waitFor(() => screen.getByText('We were not able to fetch the genres. Refresh the page to try again.'))
+    expect(failMessage).toBeInTheDocument();
+  });
 });
